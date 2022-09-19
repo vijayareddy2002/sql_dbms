@@ -1,0 +1,149 @@
+1.	Write a PL/SQL block to read a number and check whether it is a palindrome or not.
+ECLARE
+n NUMBER:=&n;
+S NUMBER:=0;
+temp NUMBER:=n;
+BEGIN
+ while(n > 0) LOOP
+     s:=s*10+(mod(n,10));
+     n:=TRUNC(n/10);
+END LOOP;
+dbms_output.put_line(s);
+if temp=s then
+dbms_output.put_line('palindrome');
+else
+dbms_output.put_line('not a palindrome');
+end if;
+end ;
+/
+output:
+SQL> /
+Enter value for n: 121
+old   2: n NUMBER:=&n;
+new   2: n NUMBER:=121;
+121
+palindrome
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 123
+old   2: n NUMBER:=&n;
+new   2: n NUMBER:=123;
+321
+not a palindrome
+
+PL/SQL procedure successfully completed.
+***************************************************************
+2.2.	Write a PL/SQL Program to print the first n fibonacci numbers.
+DECLARE
+n NUMBER:=&n;
+a NUMBER:=0;
+b NUMBER:=1;
+c NUMBER;
+BEGIN
+if(n=1) then
+  dbms_output.put_line(a);
+elsif n=2 then
+dbms_output.put_line(a);
+dbms_output.put_line(b);
+else
+dbms_output.put_line(a);
+dbms_output.put_line(b);
+n:=n-2;
+while(n>0) LOOP
+c:=a+b;
+dbms_output.put_line(c);
+a:=b;
+b:=c;
+n:=n-1;
+END LOOP;
+end if;
+END;
+/
+output:
+
+SQL> /
+Enter value for n: 8
+old   2: n NUMBER:=&n;
+new   2: n NUMBER:=8;
+0
+1
+1
+2
+3
+5
+8
+13
+*****************************************************
+3.	Write a PL/SQL block which will accept a number and checks if it is a prime number or not. 
+DECLARE
+n NUMBER:=&n;
+c NUMBER:=0;
+i NUMBER;
+BEGIN
+for i in 2..(n-1) loop
+if mod(n,i)=0 then
+    c:=c+1;
+end if;
+end loop;
+if c=0 then
+ dbms_output.put_line('prime number');
+else
+dbms_output.put_line('not a prime number');
+end if;
+end;
+/
+ouput:
+SQL> /
+Enter value for n: 8
+old   2: n NUMBER:=&n;
+new   2: n NUMBER:=8;
+not a prime number
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 9
+old   2: n NUMBER:=&n;
+new   2: n NUMBER:=9;
+not a prime number
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 5
+old   2: n NUMBER:=&n;
+new   2: n NUMBER:=5;
+prime number
+
+PL/SQL procedure successfully completed.
+********************************
+4.	Write a PL/SQL block which will accept two numbers and find out their LCM and HCF. The output should be stored in a table called DEMO_TAB.
+DEMO_TAB
+Number1	Number2	LCM	HCF
+DECLARE
+n NUMBER:=&n;
+m NUMBER:=&m;
+res NUMBER:=0;
+BEGIN
+while(mod(n,m)!=0) loop
+   res:=mod(n,m);
+   n:=m;
+   m:=res;
+end loop;
+dbms_output.put_line(res);
+end;
+/
+
+DECLARE
+ did NUMBER:=&did;
+c NUMBER;
+BEGIN
+delete from emp where deptno=did;
+c:=SQL%ROWCOUNT;
+insert into del_history values(did,c,sysdate);
+end;
+/
+
+
