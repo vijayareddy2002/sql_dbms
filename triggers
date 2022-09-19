@@ -1,0 +1,45 @@
+ create or replace trigger audit_trail
+ after update or insert or delete on persinfo
+ for each row
+ DECLARE
+ enum NUMBER;
+ ename varchar2(20);
+ eage NUMBER;
+ BEGIN
+ enum:=:old.empno;
+ ename:=:old.name;
+ eage:=:old.age;
+ if updating then
+ insert into auditpersinfo values(enum,ename,eage,'updated',sysdate);
+ end if;
+ if deleting then
+ insert into auditpersinfo values(enum,ename,eage,'deleted',sysdate);
+ end if;
+ if inserting then
+ insert into auditpersinfo values(enum,ename,eage,'inserted',sysdate);
+ end;
+ /
+ 
+ 
+ 
+ 
+ 
+ 
+ create or replace trigger trig3
+ before update on emp_trig
+ for each row
+ BEGIN
+ if (:old.sal >:new.sal) then
+raise_application_error(-20000,'cant update');
+ end if;
+end;
+/
+SQL> update emp_trig set sal=900 where empno=7499;
+1 row updated.
+SQL> update emp_trig set sal=600 where empno=7499;
+update emp_trig set sal=600 where empno=7499
+       *
+ERROR at line 1:
+ORA-20000: cant update
+ORA-06512: at "SCOTT.TRIG3", line 3
+ORA-04088: error during execution of trigger 'SCOTT.TRIG3'
